@@ -101,6 +101,13 @@ For most of the topics the compiler will provide suggestions.
   ``c.transfer(...)`` to ``address(c).transfer(...)``,
   and ``c.balance`` to ``address(c).balance``.
 
+* Explicit conversions between arbitrary contract types that are not part of the same
+  inheritance hierarchy are now disallowed. Instead, you need to explicitly convert
+  to ``address`` first. Example: if ``A`` and ``B`` are contract types, ``B`` does
+  not inherit from ``A`` and ``b`` is a contract of type ``B``, you have to convert
+  using ``A(address(b))``. Note that you still need to watch out for matching payable
+  fallback functions, as explained below.
+
 * The ``address`` type  was split into ``address`` and ``address payable``,
   where only ``address payable`` provides the ``transfer`` function.  An
   ``address payable`` can be directly converted to an ``address``, but the
